@@ -18,3 +18,10 @@ body {
   height: calc("100vh" - "50px");
   width: 100%;
 }
+
+#main-view {
+  height: 50vh;
+  width: 65%;
+  align-items: center !important;
+  border: 2px solid black;
+}
