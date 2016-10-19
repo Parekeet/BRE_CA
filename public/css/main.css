@@ -1,0 +1,20 @@
+body {
+  /*overflow: hidden !important;*/
+}
+
+.navbar-padding {
+  padding-top: 50px;
+}
+
+.navbar-default {
+  background-color: black !important;
+ }
+
+.navbar-brand {
+  color: white !important;
+}
+
+.c-photos {
+  height: calc("100vh" - "50px");
+  width: 100%;
+}

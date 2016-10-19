@@ -1,0 +1,89 @@
+<div ng-controller="EstimatePropertyCtrl as vm" class="container-fluid">
+  <header class="text-center">
+    <h1>Estimate Your Property</h1>
+  </header>
+  <br>
+  <form ng-submit="vm.addProperty()">
+    <div class="row">
+      <div>
+        <label class="text-center col-xs-12 col-md-3" for="new-property-name">Name</label>
+        <input class="col-xs-12 col-md-2 write-in" required type="text" id="new-property-name" placeholder="" ng-model='vm.newProperty.name'>
+      </div>
+      <div>
+        <label class="text-center col-xs-12 col-md-3" for="new-property-phone">Phone Number</label>
+        <input class="col-xs-12 col-md-2 write-in" required type="number" id="new-property-phone" placeholder="" ng-model='vm.newProperty.phone'>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div>
+        <label class="text-center col-xs-12 col-md-3" for="new-property-address">Address</label>
+        <input class="col-xs-12 col-md-2 write-in" required type="text" id="new-property-address" placeholder="" ng-model='vm.newProperty.address'>
+      </div>
+      <div>
+        <label class="text-center col-xs-12 col-md-3" for="new-property-zip">Zip Code</label>
+        <input class="col-xs-12 col-md-2 write-in" required type="number" id="new-property-zip" placeholder="" ng-model='vm.newProperty.zip'>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div>
+        <label class="text-center col-xs-12 col-md-3" for="new-property-state">State</label>
+        <input class="col-xs-12 col-md-2 write-in" required type="text" id="new-property-state" placeholder="" ng-model='vm.newProperty.state'>
+      </div>
+      <div>
+        <label class="text-center col-xs-12 col-md-3" for="new-property-units">Units</label>
+        <input class="col-xs-12 col-md-2 write-in" required type="number" id="new-property-units" placeholder="" ng-model='vm.newProperty.units'>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div>
+        <label class="text-center col-xs-12 col-md-3" for="new-property-gross-rent">Gross Rent</label>
+        <input class="col-xs-12 col-md-2 write-in" required type="number" id="new-property-gross-rent" placeholder="" ng-model='vm.newProperty.gross_rent'>
+      </div>
+      <button class="col-md-2 col-md-offset-3" type="submit" ng-click="estimatedValue = !estimatedValue" value="Submit">See Estimated Value</button>
+    </div>
+  </form>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <h1 class="text-center show-box" ng-show="estimatedValue" ng-model="vm.newProperty.estimation">
+        ${{ (((vm.newProperty.units * vm.newProperty.gross_rent)*12)*0.65)/0.04 }}
+      </h1>
+    </div>
+  </div>
+
+
+    <div class="row">
+      <div class="col-xs-12 col-md-6 text-right" ng-show="estimatedValue">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Sell Now</button>
+        <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+          <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+              <p>Thank you for submitting your information</p>
+              <p>An agent will be in contact with you within 24 hours</p>
+              <p>After an inspection, lsadkj;asjg;ioajg;asjgl;j 48 hours a;sljfka;slfja;lsjfla;jflajf sell in cash</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-12 col-md-6" ng-show="estimatedValue">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Contact an Agent</button>
+        <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+          <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+              Here is a list of our best agents for this area:
+              <ol>
+                <li>Vicky</li>
+                <li>Bixby</li>
+                <li>Trixie</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+</div>
