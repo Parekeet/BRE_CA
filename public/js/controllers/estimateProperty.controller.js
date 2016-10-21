@@ -65,7 +65,7 @@
     }
 
   //Show & Hide Property Estimate
-  $scope.propertyEstimate = false;
+  // $scope.propertyEstimate = false;
 
   function estimateValue() {
     ((($scope.units * $scope.gross_rent)*12)*0.65)/0.04;
