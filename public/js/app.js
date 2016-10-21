@@ -4,4 +4,7 @@ $(document).ready(function () {
     });
 
     $('.carousel').carousel('cycle');
+
+    $filter('currency')(amount, symbol, fractionSize);
 });
+

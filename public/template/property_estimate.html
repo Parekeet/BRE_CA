@@ -1,45 +1,79 @@
 <div ng-controller="EstimatePropertyCtrl as vm" class="container-fluid">
   <header class="text-center">
-    <h1>Estimate Your Property</h1>
+    <h1>Estimate Your Property Value</h1>
   </header>
   <br>
   <div class="vertical-center">
     <form ng-submit="vm.addProperty()">
       <!-- ENTER GROSS RENT -->
-      <div class="row" ng-hide="showMe = showMe" style="border: 3px solid blue">
+      <div class="row form-group" ng-hide="showMe = showMe" style="border: 3px solid blue">
         <div class="col-xs-12 col-md-12">
-          <div class="text-center content-spacing">
-            <label for="new-property-gross-rent">Gross Rent</label>
-            <input required type="number" id="new-property-gross-rent" placeholder="" ng-model='vm.newProperty.gross_rent'>
+          <div class="content-spacing text-center">
+            <label for="new-property-gross-rent"><h3>Gross Rent</h3></label>
+            <input class="input-lg" required type="number" id="new-property-gross-rent" placeholder="12000" ng-model='vm.newProperty.gross_rent'>
+            <button class="button-deco btn-lg" ng-click="showMe=1">Submit</button>
           </div>
         </div>
-        <button ng-click="showMe=1">Submit</button>
       </div>
 
       <!-- SHOW RANGE AND INPUT ADDRESS -->
-      <div class="row" ng-show="showMe==1" style="border: 3px solid green">
-        <div class="col-xs-12 col-md-12 content-spacing">
-          <h1 class="text-center" ng-model="vm.newProperty.estimation">
-            ${{ (((vm.newProperty.gross_rent*12)*0.65)/0.04)*.9 }} - ${{ (((vm.newProperty.gross_rent*12)*0.65)/0.04)*1.1 }}
-          </h1>
+      <div class="row content-spacing" ng-show="showMe==1" style="border: 3px solid green">
+        <div class="col-xs-12 col-md-12">
+          <div class="text-center">
+            <h2>Here is your estimated value</h2>
+            <h1 class="text-center" ng-model="vm.newProperty.estimation">
+              {{ (((vm.newProperty.gross_rent*12)*0.65)/0.04)*.9 | currency : symbol : fractionSize}} - {{ (((vm.newProperty.gross_rent*12)*0.65)/0.04)*1.1 | currency : symbol : fractionSize}}
+            </h1>
+            <small>For a more accurate estimate, please enter your address below:</small>
+          </div>
+        </div>
+        <br>
+<!--         <div class="col-xs-12 col-md-12">
+          <div class="text-center">
+            <label for="new-property-address"><h3>Address</h3></label>
+            <input class="input-lg" required type="text" id="new-property-address" placeholder="" ng-model='vm.newProperty.address'>
+            <button class="button-deco btn-lg" ng-click="showMe = 2">Next</button>
+          </div>
+        </div> -->
+        <div class="col-xs-12 col-md-12">
+          <div class="text-center">
+            <label class="col-xs-12 col-md-5 text-right" for="new-property-address"><h3>Address</h3></label>
+            <input class="col-xs-12 col-md-3 text-left input-lg" required type="text" id="new-property-address" placeholder="" ng-model='vm.newProperty.address'>
+          </div>
         </div>
         <div class="col-xs-12 col-md-12">
           <div class="text-center">
-            <label for="new-property-address">Address</label>
-            <input required type="text" id="new-property-address" placeholder="" ng-model='vm.newProperty.address'>
+            <label class="col-xs-12 col-md-5 text-right" for="new-property-city"><h3>City</h3></label>
+            <input class="col-xs-12 col-md-3 text-left input-lg" required type="text" id="new-property-city" placeholder="" ng-model='vm.newProperty.city'>
           </div>
         </div>
-        <button ng-click="showMe = 2">Next</button>
+        <div class="col-xs-12 col-md-12">
+          <div class="text-center">
+            <label class="col-xs-12 col-md-5 text-right" for="new-property-zip_code"><h3>Zip Code</h3></label>
+            <input class="col-xs-12 col-md-3 text-left input-lg" required type="text" id="new-property-zip_code" placeholder="" ng-model='vm.newProperty.zip_code'>
+          </div>
+        </div>
+        <div class="col-xs-12 col-md-12">
+          <div class="text-center">
+            <label class="col-xs-12 col-md-5 text-right" for="new-property-state"><h3>State</h3></label>
+            <input class="col-xs-12 col-md-3 text-left input-lg" required type="text" id="new-property-state" placeholder="" ng-model='vm.newProperty.state'>
+          </div>
+        </div>
+        <div class="col-xs-12 col-md-12">
+          <div class="text-center">
+            <button class="button-deco btn-lg" ng-click="showMe = 2">Next</button>
+          </div>
+        </div>
       </div>
 
       <!-- SHOW AMOUNT IN CASH & SELL NOW OR CONTACT AGENT -->
       <div class="row" ng-show="showMe==2" style="border: 3px solid pink">
-        <div class="col-xs-12 col-md-12 content-spacing">
+        <div class="col-xs-12 col-md-12 content-spacingr">
           <h1 class="text-center">
-            Amount in Cash: ${{ (((vm.newProperty.gross_rent*12)*0.65)/0.04)*.7 }}
+            Amount in Cash: {{ (((vm.newProperty.gross_rent*12)*0.65)/0.04)*.7 | currency : symbol : fractionSize}}
           </h1>
         </div>
-      <button type="submit" value="Submit">Sell Now</button>
+      <button class="button-deco btn-lg" type="submit" value="Submit">Sell Now</button>
       </div>
     </form>
   </div>
