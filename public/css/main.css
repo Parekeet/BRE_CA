@@ -26,12 +26,24 @@ body {
   border: 2px solid black;
 }
 
-.vertical-center {
-  min-height: 80%;  /* Fallback for browsers do NOT support vh unit */
-  min-height: 80vh; /* These two lines are counted as one :-)       */
-
+/*.vertical-center {
+  min-height: 60%;
+  min-height: 60vh;
   display: flex;
   align-items: center;
+}*/
 
-  overflow: hidden;
+.vertical-center {
+  min-height: 60%;
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /*align-items: center;*/
 }
+
+.content-spacing {
+  padding-top: 30px;
+  padding-bottom:30px;
+}
+
