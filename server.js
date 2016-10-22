@@ -85,12 +85,12 @@ app.use(allowCrossDomain);
 
 // router.route('/properties/:property_id')
 
-  //GET BY ID
+  // GET BY ID
   // .get(function(req, res) {
-    //MONGO USES KEY:VALUE PAIRING
-    //WE ARE USING {} BECAUSE IT IS AN OBJECT
-    //WE USE BODY WHEN WE SEND INFO (POST)
-    //WE USE PARAMS WHEN WE ARE GRABBING SOMETHING FROM THE URL
+  //   MONGO USES KEY:VALUE PAIRING
+  //   WE ARE USING {} BECAUSE IT IS AN OBJECT
+  //   WE USE BODY WHEN WE SEND INFO (POST)
+  //   WE USE PARAMS WHEN WE ARE GRABBING SOMETHING FROM THE URL
   //   Property.findById({_id: req.params.property_id}, function(err, property){
   //     if (err)
   //       res.send(err);

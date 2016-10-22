@@ -14,7 +14,6 @@
     vm.addProperty = addProperty;
     vm.newProperty = {};
     vm.deleteProperty = deleteProperty;
-    vm.estimateValue = estimateValue;
 
     //THIS IS WHAT ALLOWS ANGULAR TO COMMUNICATE WITH BACKEND
     //CONTINUE CRUD
@@ -64,15 +63,6 @@
         });
     }
 
-  //Show & Hide Property Estimate
-  // $scope.propertyEstimate = false;
-
-  function estimateValue() {
-    ((($scope.units * $scope.gross_rent)*12)*0.65)/0.04;
   };
-
-  };
-
-
 
 })();

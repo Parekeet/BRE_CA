@@ -1,15 +1,13 @@
-<div ng-controller="EstimatePropertyCtrl as vm" class="container-fluid">
-  <header class="text-center">
-    <h1>Estimate Your Property Value</h1>
-  </header>
-  <br>
+<div ng-controller="EstimatePropertyCtrl as vm" name="no" class="container-fluid estimatePage">
   <div class="vertical-center">
-    <form ng-submit="vm.addProperty()">
+
+    <form name="myProp" ng-submit="vm.addProperty()">
+
       <!-- ENTER GROSS RENT -->
-      <div class="row form-group" ng-hide="showMe = showMe" style="border: 3px solid blue">
+      <div class="row" ng-hide="showMe=showMe">
         <div class="col-xs-12 col-md-12">
           <div class="content-spacing text-center">
-            <label for="new-property-gross-rent"><h3>Gross Rent</h3></label>
+            <label class="estimateLabel" for="new-property-gross-rent"><h3>Gross Rent</h3></label>
             <input class="input-lg" required type="number" id="new-property-gross-rent" placeholder="12000" ng-model='vm.newProperty.gross_rent'>
             <button class="button-deco btn-lg" ng-click="showMe=1">Submit</button>
           </div>
@@ -17,66 +15,82 @@
       </div>
 
       <!-- SHOW RANGE AND INPUT ADDRESS -->
-      <div class="row content-spacing" ng-show="showMe==1" style="border: 3px solid green">
+      <div class="row content-spacing" ng-show="showMe==1">
         <div class="col-xs-12 col-md-12">
-          <div class="text-center">
+          <div class="text-center estimateLabel">
             <h2>Here is your estimated value</h2>
-            <h1 class="text-center" ng-model="vm.newProperty.estimation">
+            <h1 class="text-center estimateLabel" ng-model="vm.newProperty.estimation">
               {{ (((vm.newProperty.gross_rent*12)*0.65)/0.04)*.9 | currency : symbol : fractionSize}} - {{ (((vm.newProperty.gross_rent*12)*0.65)/0.04)*1.1 | currency : symbol : fractionSize}}
             </h1>
-            <small>For a more accurate estimate, please enter your address below:</small>
+            <p>For a more accurate estimate, please enter your address below:</p>
           </div>
         </div>
         <br>
-<!--         <div class="col-xs-12 col-md-12">
-          <div class="text-center">
-            <label for="new-property-address"><h3>Address</h3></label>
-            <input class="input-lg" required type="text" id="new-property-address" placeholder="" ng-model='vm.newProperty.address'>
-            <button class="button-deco btn-lg" ng-click="showMe = 2">Next</button>
-          </div>
-        </div> -->
         <div class="col-xs-12 col-md-12">
           <div class="text-center">
-            <label class="col-xs-12 col-md-5 text-right" for="new-property-address"><h3>Address</h3></label>
+            <label class="col-xs-12 col-md-5 text-right estimateLabel" for="new-property-address"><h3>Address</h3></label>
             <input class="col-xs-12 col-md-3 text-left input-lg" required type="text" id="new-property-address" placeholder="" ng-model='vm.newProperty.address'>
           </div>
         </div>
         <div class="col-xs-12 col-md-12">
           <div class="text-center">
-            <label class="col-xs-12 col-md-5 text-right" for="new-property-city"><h3>City</h3></label>
+            <label class="col-xs-12 col-md-5 text-right estimateLabel" for="new-property-city"><h3>City</h3></label>
             <input class="col-xs-12 col-md-3 text-left input-lg" required type="text" id="new-property-city" placeholder="" ng-model='vm.newProperty.city'>
           </div>
         </div>
         <div class="col-xs-12 col-md-12">
           <div class="text-center">
-            <label class="col-xs-12 col-md-5 text-right" for="new-property-zip_code"><h3>Zip Code</h3></label>
-            <input class="col-xs-12 col-md-3 text-left input-lg" required type="text" id="new-property-zip_code" placeholder="" ng-model='vm.newProperty.zip_code'>
+            <label class="col-xs-12 col-md-5 text-right estimateLabel" for="new-property-zip_code"><h3>Zip Code</h3></label>
+            <input class="col-xs-12 col-md-3 text-left input-lg" required type="number" id="new-property-zip-code" placeholder="" ng-model='vm.newProperty.zip_code'>
           </div>
         </div>
         <div class="col-xs-12 col-md-12">
           <div class="text-center">
-            <label class="col-xs-12 col-md-5 text-right" for="new-property-state"><h3>State</h3></label>
+            <label class="col-xs-12 col-md-5 text-right estimateLabel" for="new-property-state"><h3>State</h3></label>
             <input class="col-xs-12 col-md-3 text-left input-lg" required type="text" id="new-property-state" placeholder="" ng-model='vm.newProperty.state'>
           </div>
         </div>
         <div class="col-xs-12 col-md-12">
           <div class="text-center">
-            <button class="button-deco btn-lg" ng-click="showMe = 2">Next</button>
+            <button class="button-deco btn-lg" ng-click="showMe=2">Next</button>
           </div>
         </div>
       </div>
 
       <!-- SHOW AMOUNT IN CASH & SELL NOW OR CONTACT AGENT -->
-      <div class="row" ng-show="showMe==2" style="border: 3px solid pink">
-        <div class="col-xs-12 col-md-12 content-spacingr">
-          <h1 class="text-center">
-            Amount in Cash: {{ (((vm.newProperty.gross_rent*12)*0.65)/0.04)*.7 | currency : symbol : fractionSize}}
-          </h1>
+      <div class="row estimateLabel" ng-show="showMe==2">
+        <div class="row">
+          <div class="col-xs-12 col-md-12 content-spacing" ng-model="vm.newProperty.cash_price">
+            <h1 class="text-center estimateLabel">
+              Exact Amount: {{ ((vm.newProperty.gross_rent*12)*0.65)/0.04 | currency : symbol : fractionSize}}
+              Amount in Cash: {{ (((vm.newProperty.gross_rent*12)*0.65)/0.04)*.7 | currency : symbol : fractionSize}}
+            </h1>
+          </div>
+          <div class="col-xs-12 col-md-12 content-spacing" ng-model="vm.newProperty.cash_price">
+            <h1 class="text-center estimateLabel">
+              Amount in Cash: {{ (((vm.newProperty.gross_rent*12)*0.65)/0.04)*.7 | currency : symbol : fractionSize}}
+            </h1>
+          </div>
         </div>
-      <button class="button-deco btn-lg" type="submit" value="Submit">Sell Now</button>
+        <div class="row">
+          <div class="col-xs-12 col-md-12">
+            <div class="text-center">
+              <label class="col-xs-12 col-md-5 text-right estimateLabel" for="new-property-email"><h3>Email</h3></label>
+              <input class="col-xs-12 col-md-3 text-left input-lg" required type="text" id="new-property-email" placeholder="" ng-model='vm.newProperty.email'>
+            </div>
+          </div>
+          <div class="col-xs-12 col-md-12">
+            <div class="text-center">
+              <label class="col-xs-12 col-md-5 text-right estimateLabel" for="new-property-phone"><h3>Phone Number</h3></label>
+              <input class="col-xs-12 col-md-3 text-left input-lg" required type="text" id="new-property-phone" placeholder="" ng-model='vm.newProperty.phone'>
+            </div>
+          </div>
+        </div>
+        <button type="submit" value="submit" class="button-deco btn-lg">Sell Now</button>
       </div>
-    </form>
-  </div>
 
+    </form>
+
+  </div>
 </div>
 
