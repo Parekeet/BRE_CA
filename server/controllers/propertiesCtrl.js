@@ -20,51 +20,44 @@ module.exports = {
     //     console.log(err);
     //   else res.send('Hey, a property has successfully been created!');
     // })
-
     newProperty.save()
-          .then(function(newProperty) {
-            // send email to user
-            // communicate order to e24
+      .then(function(newProperty) {
+          var sendMailTo = function(req, res, next){
+            var transporter = nodemailer.createTransport({
+              service: 'Gmail',
+              auth: {
+                user: 'mintthaiservice@gmail.com',
+                pass: 'scoobymint1'
+              }
+            });
 
-      ////////////////////////////////////////////////
-              var sendMailTo = function(req, res, next){
-                var transporter = nodemailer.createTransport({
-                  service: 'Gmail',
-                  auth: {
-                    user: 'mintthaiservice@gmail.com',
-                    pass: 'scoobymint1'
-                  }
-                });
+            var mailOptions = {
+              from: 'BRE Services <parekeet@gmail.com>',
+              to:   'mintthaiservice@gmail.com',
+              subject: 'You have a client interested in selling their property',
+              text: 'You have an order with the following details... Order: ' + newProperty,
+              html: '<p>You have an order with the following details...</p>' + newProperty
+            };
 
-                var mailOptions = {
-                  from: 'Pare <parekeet@gmail.com>',
-                  to:   'mintthaiservice@gmail.com',
-                  subject: 'Order Submission',
-                  text: 'You have an order with the following details... Order: ' + newProperty,
-                  html: '<p>You have an order with the following details...</p>' + newProperty
-                };
-
-                transporter.sendMail(mailOptions, function(error, info){
-                  if(error){
-                    console.log(error);
-                  } else {
-                    console.log("Message Sent: " +info.response);
-                  }
-                })
-              };
-            res.json(newProperty);
-            sendMailTo();
-          })
-          .catch(function(err) {
-            if (err.message.match(/E11000/)) {
-              err.status = 409;
-            } else {
-              err.status = 422;
-            }
-            next(err);
-          });
-  // },
-
+            transporter.sendMail(mailOptions, function(error, info){
+              if(error){
+                console.log(error);
+              } else {
+                console.log("Message Sent: " +info.response);
+              }
+            })
+          };
+        res.json(newProperty);
+        sendMailTo();
+      })
+      .catch(function(err) {
+        if (err.message.match(/E11000/)) {
+          err.status = 409;
+        } else {
+          err.status = 422;
+        }
+        next(err);
+      });
   },
 
   //FIND ALL : GET

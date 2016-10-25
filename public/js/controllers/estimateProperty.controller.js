@@ -14,6 +14,7 @@
     vm.addProperty = addProperty;
     vm.newProperty = {};
     vm.deleteProperty = deleteProperty;
+    vm.checkProperty = checkProperty;
 
     //THIS IS WHAT ALLOWS ANGULAR TO COMMUNICATE WITH BACKEND
     //CONTINUE CRUD
@@ -34,6 +35,36 @@
           console.log(err);
         });
     }
+
+    //CHECK PROPERTY
+    function checkProperty() {
+      // var AddressLine1 = vm.newProperty.address1;
+      // var AddressLine2 = vm.newProperty.address2;
+
+      // var query = {
+      //   "AddressLine1" : AddressLine1,
+      //   "AddressLine2" : AddressLine2,
+      //   "UserKey"      : ""
+      // }
+
+      var AddressLine1 = {
+        "AddressLine1" : vm.newProperty.address1
+      }
+      var AddressLine2 = {
+        "AddressLine2" : vm.newProperty.address2
+      }
+
+      $http
+        // .get('https://www.yaddress.net/api/address/')
+        .get('https://www.yaddress.net/api/address/?AddressLine1={AddressLine1}&AddressLine2={AddressLine2}')
+        .then(function(res){
+          console.log(res);
+          console.log(AddressLine1, AddressLine2);
+        }, function(err){
+          console.log(err);
+        });
+    }
+    ////////////////
 
     //Adding Property
     function addProperty(){
