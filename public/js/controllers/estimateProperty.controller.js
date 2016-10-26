@@ -38,28 +38,20 @@
 
     //CHECK PROPERTY
     function checkProperty() {
-      // var AddressLine1 = vm.newProperty.address1;
-      // var AddressLine2 = vm.newProperty.address2;
-
-      // var query = {
-      //   "AddressLine1" : AddressLine1,
-      //   "AddressLine2" : AddressLine2,
-      //   "UserKey"      : ""
-      // }
-
-      var AddressLine1 = {
-        "AddressLine1" : vm.newProperty.address1
+      var AddressLine1 = vm.newProperty.address1;
+      var AddressLine2 = vm.newProperty.address2;
+      var bloop = {
+        "AddressLine1" : AddressLine1,
+        "AddressLine2" : AddressLine2
       }
-      var AddressLine2 = {
-        "AddressLine2" : vm.newProperty.address2
+      function encodeAddressURI(str){
+        return encodeURI(str).replace(/%20/g, "+");
       }
-
       $http
-        // .get('https://www.yaddress.net/api/address/')
-        .get('https://www.yaddress.net/api/address/?AddressLine1={AddressLine1}&AddressLine2={AddressLine2}')
+        .get('https://www.yaddress.net/api/address/?AddressLine1='+encodeAddressURI(bloop.AddressLine1)+'&AddressLine2='+encodeAddressURI(bloop.AddressLine2))
         .then(function(res){
           console.log(res);
-          console.log(AddressLine1, AddressLine2);
+          console.log(bloop);
         }, function(err){
           console.log(err);
         });
